@@ -90,7 +90,6 @@ def main():
     factor = pd.Series(index=extra_stock_performance.columns)
     summary = {}
     for i, stock in enumerate(extra_stock_performance.columns):
-        # predicted_extra_ret = pd.DataFrame()
         stock_predict_arma, stock_summary_arma = test_strategy.arma_forecast(extra_stock_performance[stock], 1, 0)
         summary[stock] = stock_summary_arma
         factor[i] = float(stock_predict_arma)
