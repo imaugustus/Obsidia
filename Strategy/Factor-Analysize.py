@@ -25,9 +25,9 @@ class RegressionTest:
         no_st_MktData = self.Code_First_MktData.drop(dropped_code, axis="columns", level=0)
         return no_st_MktData
 
-    def cross_section_selection(self):
-        month_end_loc = self.drop_st().index
-        print(month_end_loc.is_month_end())
+    # def cross_section_selection(self):
+    #     month_end_loc = self.drop_st().index
+    #     print(month_end_loc.is_month_end())
 
 def main():
     test = RegressionTest()

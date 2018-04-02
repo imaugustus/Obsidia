@@ -19,8 +19,7 @@ class Strategy:
         self.industry_code = industry_code
         self.intern = pickle.load(open(r'D:/Data/intern.pkl', 'rb'))
         self.MktData = self.intern['MktData']
-        self.MktData.index.to_datetime()
-        self.MktData.columns.name = ['Feature', 'Code']
+        self.InstrumentInfo = self.intern['InstrumentInfo']
         self.code_first_MktData = self.MktData.swaplevel(0, 1, axis=1)
 
     def get_industry_descendant(self, industry_code, industry_order=1):
@@ -31,6 +30,7 @@ class Strategy:
             if re.match(pattern, stock):
                 descendant.append(index)
         return np.asarray(descendant)
+
 
     def category_index(self, industry_code, train_size=50):
         descendant = self.get_industry_descendant(industry_code, industry_order=3)
@@ -48,7 +48,6 @@ class Strategy:
         extra_stock_performance = industry_cumsum.sub(industry_cumsum.mean(axis=1), axis=0)
         extra_stock_performance.index = self.MktData.index[-train_size:-1]
         return industry_index, extra_stock_performance, yesterday_ret_cumsum
-
 
     def arma_forecast(self, ts,  p, q,):
         arma = ARMA(ts, order=(p, q)).fit(disp=-1)
