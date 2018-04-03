@@ -12,8 +12,6 @@ class RegressionTest:
         self.intern = pickle.load(open(r'D:/Data/intern.pkl', 'rb'))
         self.InstrumentInfo = self.intern['InstrumentInfo']
         self.MktData = self.intern['MktData']
-        self.MktData.columns.name = ['Feature', 'Code']
-        #self.MktData.index.to_datetime()
         self.Code_First_MktData = self.MktData.swaplevel(0, 1, axis=1)
 
     def drop_st(self):

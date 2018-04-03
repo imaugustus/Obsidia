@@ -1,8 +1,7 @@
 import numpy as np
 import time
-import datetime
+from datetime import datetime, timedelta
 import pandas as pd
-from datetime import datetime
 import matplotlib.pylab as plt
 plt.rcParams['font.sans-serif']=['SimHei']
 from matplotlib.pylab import rcParams
@@ -14,10 +13,12 @@ from statsmodels.tsa.arima_model import ARMA
 from statsmodels.tsa.arima_model import ARIMA
 import re
 import numpy
+from pandas import tseries
+
 
 
 class Strategy:
-    def __init__(self, industry_code):
+    def __init__(self, industry_code='720000', start='2017-01-03', time_period=20, industry_order=3):
         self.industry_code = industry_code
         self.intern = pickle.load(open(r'D:/Data/intern.pkl', 'rb'))
         self.MktData = self.intern['MktData']
@@ -25,6 +26,9 @@ class Strategy:
         self.First_Tradiung_Date = self.intern['InstrumentInfo']['FirstTradingDate']
         self.code_first_MktData = self.MktData.swaplevel(0, 1, axis=1)
         self.no_st_code_first_MktData, self.dropped_code = self.drop_st()
+        self.start = start
+        self.time_period = time_period
+        self.industry_order = industry_order
 
     def get_industry_descendant(self, industry_code, industry_order=3):
         no_st_InstrumentInfo = self.InstrumentInfo.drop(self.dropped_code, axis="index")
@@ -55,81 +59,117 @@ class Strategy:
         no_st_MktData = self.code_first_MktData.drop(dropped_code, axis="columns", level=0)
         return no_st_MktData, dropped_code
 
-    def category_index(self, industry_code, start='2018-02-01', end='2018-03-14', industry_order=3):
+    def category_index(self, industry_code, start='2017-01-03', time_period=20, industry_order=3):
         start_index = self.no_st_code_first_MktData.index.get_loc(self.no_st_code_first_MktData.loc[start].name)
-        end_index = self.no_st_code_first_MktData.index.get_loc(self.no_st_code_first_MktData.loc[end].name)
-        descendant = self.get_industry_descendant(industry_code, industry_order=3)
-        print("Category:", descendant.shape)
+        # end_index = self.no_st_code_first_MktData.index.get_loc(self.no_st_code_first_MktData.loc[end].name)
+        end_index = start_index+time_period
+        descendant = self.get_industry_descendant(industry_code, industry_order)
         #valid_start_day = self.cal_valid_start_trading_day(descendant)
         industry_all = pd.DataFrame()
         for stock in descendant:
             try:
-                industry_all[stock] = self.no_st_code_first_MktData[stock]['ret'][start:end].as_matrix()
+                industry_all[stock] = self.no_st_code_first_MktData[stock]['ret'].iloc[start_index:end_index+1]
             except KeyError:
                 continue
-        na_industry_all = industry_all.dropna(axis=1, how='any')
-        na_industry_all.index = self.no_st_code_first_MktData.index[start_index:end_index+1]
-        na_industry_index = na_industry_all.mean(axis=1, skipna=True)
-        na_extra_stock_performance = na_industry_all.sub(na_industry_index, axis=0)
-        return na_industry_index, na_extra_stock_performance
+        na_free_industry_all = industry_all.dropna(axis=1, how='any')
+        na_free_industry_all.index = self.no_st_code_first_MktData.index[start_index:end_index+1]
+        na_free_industry_index = na_free_industry_all.mean(axis=1, skipna=True)
+        na_free_extra_stock_performance = na_free_industry_all.sub(na_free_industry_index, axis=0)
+        return na_free_industry_index, na_free_extra_stock_performance
 
-    def cal_real_extra_performance(self, industry_code, date='2018-03-15', industry_order=3):
-        descendant = self.get_industry_descendant(industry_code, industry_order=3)
-        print("Next:", descendant.shape)
+    def cal_real_extra_performance(self, industry_code='720000', start='2017-01-03', time_period=20, industry_order=3):
+        start_index = self.no_st_code_first_MktData.index.get_loc(self.no_st_code_first_MktData.loc[start].name)
+        end_index = start_index + time_period
+        real_index = start_index + time_period + 1
+        descendant = self.get_industry_descendant(industry_code, industry_order)
+        industry_all = pd.DataFrame()
+        for stock in descendant:
+            try:
+                industry_all[stock] = self.no_st_code_first_MktData[stock]['ret'].iloc[start_index:end_index+1]
+            except KeyError:
+                continue
+        na_free_industry_all = industry_all.dropna(axis=1, how='any')
+        na_dropped_stock = industry_all.columns[~industry_all.columns.isin(na_free_industry_all.columns)]
+        no_na_descendant = [item for item in descendant if item not in na_dropped_stock]
         industry_index = 0
         count = 0
-        stock_ret = pd.Series(index=descendant)
-        for stock in descendant:
-            count += 1
-            ret = self.no_st_code_first_MktData[stock]['ret'].loc[date]
-            print(ret)
-            industry_index += ret
+        stock_ret = pd.Series(index=no_na_descendant)
+        NaN_stock = []
+        for stock in no_na_descendant:
+            ret = self.no_st_code_first_MktData[stock]['ret'].iloc[real_index]
             stock_ret[stock] = ret
+            if ret != ret:
+                NaN_stock.append(stock)
+            else:
+                count += 1
+                industry_index += ret
         real_extra_performace = stock_ret - industry_index/count
-        return real_extra_performace
+        return NaN_stock, real_extra_performace
 
-    def arma_forecast(self, ts,  p, q,):
+    def arma_forecast(self, ts,  p, q):
         arma = ARMA(ts, order=(p, q)).fit(disp=-1)
-        ts_predict = arma.predict()
+        # ts_predict = arma.predict()
         next_ret = arma.forecast(1)[0]
-        #print("Forecast stock extra return of next day: ", next_ret)
-        # plt.clf()
-        # plt.plot(ts_predict, label="Predicted")
-        # plt.plot(ts, label="Original")
-        # plt.legend(loc="best")
-        # plt.title("AR Test {},{}".format(p, q))
-        # plt.show()
         return next_ret, arma.summary2()
 
     def arima_forecast(self, ts,  p, i, q,):
         arima = ARIMA(ts, order=(p, i, q)).fit(disp=-1)
-        ts_predict = arima.predict()
+        # ts_predict = arima.predict()
         next_ret = arima.forecast(1)[0]
         return next_ret, arima.summary2()
 
-
-def train_forecast():
-    strategy = Strategy('720000')
-    industry_index, extra_stock_performance = strategy.category_index(industry_code=\
-        strategy.industry_code, start='2018-02-01', end='2018-03-14', industry_order=2)
-    strategy_factor = pd.DataFrame(index=extra_stock_performance.columns, columns=['Estimated', 'Real'])
-    real_extra_performance = strategy.cal_real_extra_performance(industry_code=\
-        strategy.industry_code, date='2018-03-15', industry_order=3)
-    print(real_extra_performance)
-    strategy_summary = {}
-    for i, stock in enumerate(extra_stock_performance.columns):
-        predict_extra_performance, stock_summary = strategy.arma_forecast(extra_stock_performance[stock], 1, 0)
-        strategy_summary[stock] = stock_summary
-        strategy_factor.loc[stock, 'Estimated'] = float(predict_extra_performance)
-        strategy_factor.loc[stock, 'Real'] = real_extra_performance[stock]
-    return strategy_factor, strategy_summary
-
-
+    def train_forecast(self):
+        industry_index, extra_stock_performance = self.category_index(industry_code=self.industry_code,\
+                                        start=self.start, time_period=self.time_period, industry_order=self.industry_order)
+        NaN_stock, real_extra_performance = self.cal_real_extra_performance(self.industry_code, start=self.start,\
+                                                    time_period=self.time_period, industry_order=self.industry_order)
+        strategy_factor = pd.DataFrame(index=extra_stock_performance.columns, columns=['Estimated', 'Real', 'Rightness'],dtype='float')
+        strategy_summary = {}
+        for i, stock in enumerate(extra_stock_performance.columns):
+            predict_extra_performance, stock_summary = self.arma_forecast(extra_stock_performance[stock], 1, 0)
+            strategy_summary[stock] = stock_summary
+            strategy_factor.loc[stock, 'Estimated'] = float(predict_extra_performance)
+            strategy_factor.loc[stock, 'Real'] = real_extra_performance[stock]
+            strategy_factor.loc[stock, 'Rightness'] = 1 if float(predict_extra_performance)*real_extra_performance[stock] > 0 else -1
+        return strategy_factor, strategy_summary, NaN_stock
 
 
 if __name__ == '__main__':
-    factor, summary = train_forecast()
-    # factor, summary = main()
+    ts_stats_info = {}
+    ts_stats_info = pd.DataFrame(columns=['Square_loss_sum', 'Corr', 'Precision', 'Mean', 'Std', 'Skew', 'Kur'], dtype='float')
+    industry_code_i = '720000'
+    time_period_i = 30
+    industry_order_i = 3
+    rng = pd.date_range(start='2017-12-01', end='2018-02-01', freq='1D')
+    ts = pd.Series(rng)
+    for j in range(ts.shape[0]):
+        start_date = ts[j]
+        try:
+            strategy = Strategy(industry_code_i, start_date, time_period_i, industry_order_i)
+            factor, summary, NaN_stock = strategy.train_forecast()
+            factor = factor.dropna(axis=0, how='any')
+            Same_Direction_Prediction = factor.loc[factor['Rightness'] == 1]['Rightness'].sum()
+            Diff_Direction_Prediction = factor.loc[factor['Rightness'] == -1]['Rightness'].sum()
+            max_5_prediction = factor['Estimated'].sort_values(axis=0, ascending=False).head(5)
+            factor['square_loss'] = (factor['Estimated']-factor['Real'])**2
+            squre_loss_sum = factor['square_loss'].sum()/factor.shape[0]
+            corr = factor[['Estimated', 'Real']].corr()
+            Precision = Same_Direction_Prediction / (Same_Direction_Prediction - Diff_Direction_Prediction)# 反方向的正确度累积和为负数，因此用减法
+            Mean = factor['Estimated'].mean()
+            Std = factor['Estimated'].std()
+            Skew = factor['Estimated'].skew()
+            Kurt = factor['Estimated'].kurtosis()
+            ts_stats_info.loc[start_date, 'Square_loss_sum'] = squre_loss_sum
+            ts_stats_info.loc[start_date, 'Corr'] = corr.iloc[0, 1]
+            ts_stats_info.loc[start_date, 'Precision'] = Precision
+            ts_stats_info.loc[start_date, 'Mean'] = Mean
+            ts_stats_info.loc[start_date, 'Std'] = Std
+            ts_stats_info.loc[start_date, 'Skew'] = Skew
+            ts_stats_info.loc[start_date, 'Kurt'] = Kurt
+        except KeyError:
+            continue
+        # factor.to_csv(r'D:/sync/Factor/factor.csv')
+
     # x = factor.index
     # y = factor
     # #fig = plt.figure(figsize=(15,2))
@@ -143,9 +183,6 @@ if __name__ == '__main__':
     # plt.xticks([])
     # plt.show()
 
-
-
-
     # temp = np.array(ret)
     # t = statsmodels.tsa.stattools.adfuller(temp)  # ADF检验
     # output = pd.DataFrame(index=['Test Statistic Value', "p-value", "Lags Used", "Number of Observations Used","Critical Value(1%)","Critical Value(5%)","Critical Value(10%)"],columns=['value'])
@@ -158,7 +195,6 @@ if __name__ == '__main__':
     # output['value']['Critical Value(10%)'] = t[4]['10%']
     # print(output)
 
-    #
     import statsmodels.api as sm
     # sm.tsa.arma_order_select_ic(temp,max_ar=6,max_ma=4,ic='aic')['aic_min_order']  # AIC
     # sm.tsa.arma_order_select_ic(temp,max_ar=6,max_ma=4,ic='bic')['bic_min_order']  # BIC
