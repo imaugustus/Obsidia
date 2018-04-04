@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a502ea9c-00c7-4655-9434-661ccf8edec4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/TestNewLib/pd.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Factor/factor_real_ts.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Factor/factor_real_ts.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Factor/factor_ts.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Factor/factor_ts.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Factor/ts_stats_info.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Factor/ts_stats_info.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Strategy/Arma-Strategy-V2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/Arma-Strategy-V2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Strategy/Factor-Analysize.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/Factor-Analysize.py" afterDir="false" />
@@ -20,11 +25,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Arma-Strategy-V2.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Arma-Strategy-V2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-210">
-              <caret line="139" column="30" lean-forward="true" selection-start-line="139" selection-start-column="30" selection-end-line="139" selection-end-column="30" />
+            <state relative-caret-position="-33">
+              <caret line="188" column="62" lean-forward="true" selection-start-line="188" selection-start-column="62" selection-end-line="188" selection-end-column="62" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Factor-Analysize.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -48,9 +65,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Strategy/ARMA_Strategy.py" />
-        <option value="$PROJECT_DIR$/Strategy/Factor-Analysize.py" />
         <option value="$PROJECT_DIR$/TestNewLib/pd.py" />
         <option value="$PROJECT_DIR$/Strategy/Arma-Strategy-V2.py" />
+        <option value="$PROJECT_DIR$/Strategy/Factor-Analysize.py" />
       </list>
     </option>
   </component>
@@ -60,7 +77,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="45" />
     <option name="y" value="44" />
     <option name="width" value="1746" />
@@ -74,7 +91,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -106,6 +122,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -131,7 +148,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Arma-Strategy-V2">
+  <component name="RunManager" selected="Python.Factor-Analysize">
     <configuration name="ARMA_Strategy" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="sync" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -165,6 +182,25 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Strategy/Arma-Strategy-V2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="Factor-Analysize" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="sync" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\ProgramData\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Strategy" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Strategy/Factor-Analysize.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -212,9 +248,11 @@
       <item itemvalue="Python.ARMA_Strategy" />
       <item itemvalue="Python.Arma-Strategy-V2" />
       <item itemvalue="Python.pd" />
+      <item itemvalue="Python.Factor-Analysize" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Factor-Analysize" />
         <item itemvalue="Python.Arma-Strategy-V2" />
         <item itemvalue="Python.pd" />
         <item itemvalue="Python.ARMA_Strategy" />
@@ -236,18 +274,19 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3293348" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3293348" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.3293348" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5801527" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4623773" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12526652" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2153518" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.2979744" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.7846482" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991276" />
@@ -274,6 +313,16 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V2.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2363">
+          <caret line="139" column="30" lean-forward="true" selection-start-line="139" selection-start-column="30" selection-end-line="139" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V2.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2346">
           <caret line="138" column="30" lean-forward="true" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="30" />
           <folding>
@@ -286,9 +335,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -310,34 +356,37 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ARMA_Strategy.py" />
+    <entry file="file://$PROJECT_DIR$/TestNewLib/pd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/ARMA_Strategy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="986">
           <caret line="130" column="59" lean-forward="true" selection-start-line="130" selection-start-column="59" selection-end-line="130" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-33">
+          <caret line="188" column="62" lean-forward="true" selection-start-line="188" selection-start-column="62" selection-end-line="188" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="70" lean-forward="true" selection-start-line="14" selection-start-column="70" selection-end-line="14" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TestNewLib/pd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-210">
-          <caret line="139" column="30" lean-forward="true" selection-start-line="139" selection-start-column="30" selection-end-line="139" selection-end-column="30" />
+        <state relative-caret-position="306">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

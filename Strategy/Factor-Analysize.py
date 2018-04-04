@@ -5,32 +5,47 @@ from sklearn.linear_model import LinearRegression
 import pickle
 import pandas as pd
 import re
+import math
 
 
-class RegressionTest:
-    def __init__(self):
+class Group:
+    def __init__(self, industry_code):
+        self.industry_code = industry_code
         self.intern = pickle.load(open(r'D:/Data/intern.pkl', 'rb'))
-        self.InstrumentInfo = self.intern['InstrumentInfo']
         self.MktData = self.intern['MktData']
-        self.Code_First_MktData = self.MktData.swaplevel(0, 1, axis=1)
+        self.MktData = self.MktData.swaplevel(0, 1, axis=1)
+        self.factor = pickle.load(open(r'D:/sync/Factor/factor_real_ts.pkl', 'rb'))
+        self.factor = self.factor.dropna(axis=1, how='any')
 
-    def drop_st(self):
-        dropped_code = []
-        pattern = re.compile(r"\*ST")
-        for code, name in zip(self.InstrumentInfo.index, self.InstrumentInfo['Name']):
-            if re.match(pattern, name):
-                dropped_code.append(code)
-        no_st_MktData = self.Code_First_MktData.drop(dropped_code, axis="columns", level=0)
-        return no_st_MktData
+    def get_group_section(self):
+        temp = []
+        for i in range(0, len(self.factor.index), 10):
+            temp.append(self.factor.iloc[i, :])
+        return pd.concat(temp, axis=1).transpose()
 
-    # def cross_section_selection(self):
-    #     month_end_loc = self.drop_st().index
-    #     print(month_end_loc.is_month_end())
+    def factor_classification(self, section):
+        sorted_section = section.sort_values(ascending=False)
+        group_length = math.ceil(len(sorted_section)/5)
+        classification_index = {}
+        for i in range(5):
+            if i == 4:
+                classification_index[i+1] = sorted_section.index[i*group_length, len(sorted_section)]
+            else:
+                classification_index[i+1] = sorted_section.index[i*group_length, (i+1)*group_length]
+        return classification_index
+
+    def classification_all_section(self):
+        sections = self.get_group_section()
+        result = {}
+        for section in sections.index:
+            result[section] = self.factor_classification(sections.loc[section, :])
+
+
 
 def main():
-    test = RegressionTest()
-    test.cross_section_selection()
-    #print(dropped_code)
+    test = Group('720000')
+    return test.factor
+
 
 if __name__ == '__main__':
-    main()
+    result = main()
