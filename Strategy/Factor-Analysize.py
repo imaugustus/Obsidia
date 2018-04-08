@@ -6,6 +6,7 @@ import pickle
 import pandas as pd
 import re
 import math
+from datetime import datetime
 
 
 class Group:
@@ -29,23 +30,28 @@ class Group:
         classification_index = {}
         for i in range(5):
             if i == 4:
-                classification_index[i+1] = sorted_section.index[i*group_length, len(sorted_section)]
+                classification_index[i+1] = sorted_section.index[i*group_length:len(sorted_section)]
             else:
-                classification_index[i+1] = sorted_section.index[i*group_length, (i+1)*group_length]
+                classification_index[i+1] = sorted_section.index[i*group_length:(i+1)*group_length]
         return classification_index
 
     def classification_all_section(self):
         sections = self.get_group_section()
-        result = {}
+        ts_group_result = {}
         for section in sections.index:
-            result[section] = self.factor_classification(sections.loc[section, :])
+            # key = datetime.fromtimestamp(section).strftime('%Y-%m-%dT%H:%M:%SZ')
+            key = str(section)
+            ts_group_result[key] = self.factor_classification(sections.loc[section, :])
+        return ts_group_result
+
+    def plot_group_ret(self, re):
 
 
-
-def main():
-    test = Group('720000')
-    return test.factor
+# def main():
+#     test = Group('720000')
+#     test.classification_all_section()
 
 
 if __name__ == '__main__':
-    result = main()
+    test = Group('720000')
+    output = test.classification_all_section()

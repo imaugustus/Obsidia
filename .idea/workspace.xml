@@ -2,14 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a502ea9c-00c7-4655-9434-661ccf8edec4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Factor/factor_real_ts.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Factor/factor_real_ts.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Factor/factor_ts.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Factor/factor_ts.pkl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Factor/ts_stats_info.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Factor/ts_stats_info.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Strategy/Arma-Strategy-V2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/Arma-Strategy-V2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Strategy/Factor-Analysize.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/Factor-Analysize.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,7 +20,7 @@
       <file leaf-file-name="Arma-Strategy-V2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-33">
+            <state relative-caret-position="222">
               <caret line="188" column="62" lean-forward="true" selection-start-line="188" selection-start-column="62" selection-end-line="188" selection-end-column="62" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -40,8 +32,8 @@
       <file leaf-file-name="Factor-Analysize.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+            <state relative-caret-position="289">
+              <caret line="41" column="82" selection-start-line="41" selection-start-column="82" selection-end-line="41" selection-end-column="82" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -281,7 +273,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3293348" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.3293348" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4623773" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43184295" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2153518" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -375,7 +367,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-33">
+        <state relative-caret-position="222">
           <caret line="188" column="62" lean-forward="true" selection-start-line="188" selection-start-column="62" selection-end-line="188" selection-end-column="62" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -385,8 +377,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+        <state relative-caret-position="289">
+          <caret line="41" column="82" selection-start-line="41" selection-start-column="82" selection-end-line="41" selection-end-column="82" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
