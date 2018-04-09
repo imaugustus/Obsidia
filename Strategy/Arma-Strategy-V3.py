@@ -16,22 +16,23 @@ import numpy
 from pandas import tseries
 
 
+intern = pickle.load(open(r'D:/Data/intern.pkl', 'rb'))
+MktData = intern['MktData']
+InstrumentInfo = intern['InstrumentInfo']
+First_Tradiung_Date = intern['InstrumentInfo']['FirstTradingDate']
+code_first_MktData = MktData.swaplevel(0, 1, axis=1)
+
 
 class Strategy:
     def __init__(self, industry_code='720000', start='2017-01-03', time_period=20, industry_order=3):
         self.industry_code = industry_code
-        self.intern = pickle.load(open(r'D:/Data/intern.pkl', 'rb'))
-        self.MktData = self.intern['MktData']
-        self.InstrumentInfo = self.intern['InstrumentInfo']
-        self.First_Tradiung_Date = self.intern['InstrumentInfo']['FirstTradingDate']
-        self.code_first_MktData = self.MktData.swaplevel(0, 1, axis=1)
         self.no_st_code_first_MktData, self.dropped_code = self.drop_st()
         self.start = start
         self.time_period = time_period
         self.industry_order = industry_order
 
     def get_industry_descendant(self, industry_code, industry_order=3):
-        no_st_InstrumentInfo = self.InstrumentInfo.drop(self.dropped_code, axis="index")
+        no_st_InstrumentInfo = InstrumentInfo.drop(self.dropped_code, axis="index")
         pattern = re.compile(industry_code[0:industry_order])
         descendant = []
         for index, stock in zip(no_st_InstrumentInfo.index, no_st_InstrumentInfo['SWICS']):
@@ -42,7 +43,7 @@ class Strategy:
     def cal_valid_start_trading_day(self, industry_stock):
         valid_start_day = {}
         for stock in industry_stock:
-            start_trading_day = self.First_Tradiung_Date[stock]
+            start_trading_day = First_Tradiung_Date[stock]
             stock_timestamp = self.no_st_code_first_MktData.loc[start_trading_day, stock].name
             index = self.no_st_code_first_MktData.index.get_loc(stock_timestamp)
             valid_start_trading_index = index+60 #以开盘日60天之后作为数据起始点
@@ -53,18 +54,16 @@ class Strategy:
     def drop_st(self):
         dropped_code = []
         pattern = re.compile(r"\*ST")
-        for code, name in zip(self.InstrumentInfo.index, self.InstrumentInfo['Name']):
+        for code, name in zip(InstrumentInfo.index, InstrumentInfo['Name']):
             if re.match(pattern, name):
                 dropped_code.append(code)
-        no_st_MktData = self.code_first_MktData.drop(dropped_code, axis="columns", level=0)
+        no_st_MktData = code_first_MktData.drop(dropped_code, axis="columns", level=0)
         return no_st_MktData, dropped_code
 
     def category_index(self, industry_code, start='2017-01-03', time_period=30, industry_order=3):
         start_index = self.no_st_code_first_MktData.index.get_loc(self.no_st_code_first_MktData.loc[start].name)
-        # end_index = self.no_st_code_first_MktData.index.get_loc(self.no_st_code_first_MktData.loc[end].name)
         end_index = start_index+time_period
         descendant = self.get_industry_descendant(industry_code, industry_order)
-        #valid_start_day = self.cal_valid_start_trading_day(descendant)
         industry_all = pd.DataFrame()
         for stock in descendant:
             try:
@@ -147,10 +146,8 @@ if __name__ == '__main__':
     rng2 = pd.date_range(start=predict_start, end=predict_end, freq='1D')
     test = Strategy(industry_code_i, '2016-01-01', time_period_i, industry_order_i)
     test_descendant = test.get_industry_descendant(industry_code=industry_code_i, industry_order=3)
-    # iterables = [test_descendant, ['Estimated', 'Real']]
-    # col = pd.MultiIndex.from_product(iterables, names=['Stock', 'Ret'])
     factor_ts = pd.DataFrame(columns=test_descendant, index=rng2)
-    factor_real_ts = pd.DataFrame(columns=test_descendant, index=rng2)
+    factor_real_ts = pd.DataFrame(columns=test_descendant, index=rng)
     for j in range(len(rng)):
         start_date = rng[j]
         predict_date = rng2[j]
@@ -159,8 +156,8 @@ if __name__ == '__main__':
             factor, summary, predict_datetime, NaN_stock = strategy.train_forecast()
             for stock in factor.index:
                 try:
-                    factor_ts.loc[predict_date] = factor['Estimated']
-                    factor_real_ts.loc[predict_date] = factor['Real']
+                    factor_ts.loc[predict_date, stock] = factor.loc[stock, 'Estimated']
+                    factor_real_ts.loc[start_date, stock] = factor.loc[stock, 'Real']
                 except KeyError:
                     continue
                 except ValueError:
@@ -191,42 +188,5 @@ if __name__ == '__main__':
     ts_stats_info.to_pickle(r'D:/sync/Factor/ts_stats_info.pkl')
     factor_ts.to_pickle(r'D:/sync/Factor/factor_ts.pkl')
     factor_real_ts.to_pickle(r'D:/sync/Factor/factor_real_ts.pkl')
-
-
-    # x = factor.index
-    # y = factor
-    # #fig = plt.figure(figsize=(15,2))
-    # plt.scatter(x, y)
-    # plt.plot([x[0],x[-1]], [0,0], color='r')
-    # for a, b in zip(x, y):
-    #     plt.text(a, b + 0.01, '{0:.5}'.format(b), ha='center', va='bottom', fontsize=7)
-    # plt.title("280000")
-    # plt.xlabel("Stock Code")
-    # plt.ylabel("Diviation of each stock from index")
-    # plt.xticks([])
-    # plt.show()
-
-    # temp = np.array(ret)
-    # t = statsmodels.tsa.stattools.adfuller(temp)  # ADF检验
-    # output = pd.DataFrame(index=['Test Statistic Value', "p-value", "Lags Used", "Number of Observations Used","Critical Value(1%)","Critical Value(5%)","Critical Value(10%)"],columns=['value'])
-    # output['value']['Test Statistic Value'] = t[0]
-    # output['value']['p-value'] = t[1]
-    # output['value']['Lags Used'] = t[2]
-    # output['value']['Number of Observations Used'] = t[3]
-    # output['value']['Critical Value(1%)'] = t[4]['1%']
-    # output['value']['Critical Value(5%)'] = t[4]['5%']
-    # output['value']['Critical Value(10%)'] = t[4]['10%']
-    # print(output)
-
-    import statsmodels.api as sm
-    # sm.tsa.arma_order_select_ic(temp,max_ar=6,max_ma=4,ic='aic')['aic_min_order']  # AIC
-    # sm.tsa.arma_order_select_ic(temp,max_ar=6,max_ma=4,ic='bic')['bic_min_order']  # BIC
-    # sm.tsa.arma_order_select_ic(temp,max_ar=6,max_ma=4,ic='hqic')['hqic_min_order'] # HQIC
-
-    # order = (1, 1)
-    # train = ret[:-50]
-    # test = ret[-50:]
-    # tempModel = sm.tsa.ARMA(train, order).fit()
-    # tempModel.summary2()
 
 
