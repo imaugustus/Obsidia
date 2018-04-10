@@ -73,7 +73,6 @@ class Group:
             all_cumsum_ret[i] = df
         return all_cumsum_ret
 
-
 # 对每个截面按照分层结果画每个group的超额收益图
     def plot_group_extra_performance(self, ts_group_result):
         dates = list(ts_group_result.keys())
@@ -123,24 +122,65 @@ class Regression:
         factor_section = factor_section.fillna(0)
         return factor_section
 
-# 获取截面期因子暴露以及超额收益
-    def get_train_x(self, factor):
-        section_factor = []
-        for section in range(0, factor.shape[0], 30):
-            section_factor.append(factor.iloc[section, :])
-            datetime = factor.index[section]
-            index = MktData.index.get_loc(datetime)
+# 获取截面期因子暴露以及下个月平均收益
+    def get_train_data(self, factor_ts):
+        stock = list(factor_ts.columns)
+        all_section_factor_x = []
+        all_section_factor_y = []
+        for section in range(0, factor_ts.shape[0], 32):
+            section_factor_x = factor_ts.iloc[section, :]
+            all_section_factor_x.append(section_factor_x)
+            section_date = factor_ts.index[section]
+            # print("Factor section date:", section_date)
+            index = MktData.index.get_loc(section_date)
             ret_start_index = index + 1
-            ret_end_index = index + 30
-            ret = MktData.iloc
+            ret_end_index = index + 31
+            ret = MktData.loc[MktData.index[ret_start_index:ret_end_index], (stock, 'ret')]
+            section_factor_y = ret.mean(axis=0)
+            section_factor_y.index = section_factor_y.index.droplevel(1)
+            all_section_factor_y.append(section_factor_y)
+            # ret_start_date = MktData.index[ret_start_index]
+            # ret_end_date = MktData.index[ret_end_index]
+            # print('ret start date:', ret_start_date)
+            # print('ret end date:', ret_end_date)
+        return all_section_factor_x, all_section_factor_y
 
+# 预处理因子
+    def preprocess_factor(self, all_section_factor_x):
+        preprocessed_all_section_factor_x = []
+        for section_factor in all_section_factor_x:
+            section_factor = self.filter_extreme(section_factor)
+            section_factor = self.normalize(section_factor)
+            section_factor = self.fill_na(section_factor)
+            preprocessed_all_section_factor_x.append(section_factor)
+        return preprocessed_all_section_factor_x
 
+#线性回归以求得因子系数(因子载荷)
+    def get_factor_load(self):
+        all_section_factor_x, all_section_factor_y = self.get_train_data(factor)
+        preprocessed_all_section_factor_x = self.preprocess_factor(all_section_factor_x)
+        na_free_all_section_factor_y = [self.fill_na(item) for item in all_section_factor_y]
+        weights = []
+        IC = []
+        for i in range(len(preprocessed_all_section_factor_x)):
+            x = np.array(preprocessed_all_section_factor_x[i]).reshape(-1, 1)
+            y = np.array(na_free_all_section_factor_y[i])
+            clf = LinearRegression()
+            clf.fit(x, y)
+            # print('coef:', type(clf.coef_[0]))
+            # print('intercept:', clf.intercept_)
+            weights.append(clf.coef_[0])
+            ic = pd.concat([preprocessed_all_section_factor_x[i], na_free_all_section_factor_y[i]], axis=1).corr(method='spearman').iloc[0, 1]
+            IC.append(ic)
+        IC = pd.Series(IC)
+        IR = IC.mean()/IC.std()
+        return weights, IC, IR
 
-
-# 获取下一个自然月个股超额收益
 
 if __name__ == '__main__':
-    test = Group('720000')
-    ts = test.classification_all_section()
-    all_df_cumsum_ret = test.plot_group_cumsum_ret(ts)
-    # all_extra_performance = test.plot_group_extra_performance(ts)
+    test_group = Group('720000')
+    ts = test_group.classification_all_section()
+    all_df_cumsum_ret = test_group.plot_group_cumsum_ret(ts)
+    all_extra_performance = test_group.plot_group_extra_performance(ts)
+    test_regression = Regression('720000')
+    Weights, IC, IR = test_regression.get_factor_load()

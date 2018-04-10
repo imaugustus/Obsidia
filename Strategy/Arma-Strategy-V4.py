@@ -31,6 +31,8 @@ def drop_st():
             dropped_code.append(code)
     no_st_MktData = code_first_MktData.drop(dropped_code, axis="columns", level=0)
     return no_st_MktData, dropped_code
+
+
 no_st_code_first_MktData, dropped_code = drop_st()
 
 
@@ -48,7 +50,7 @@ class Strategy:
         for index, stock in zip(no_st_InstrumentInfo.index, no_st_InstrumentInfo['SWICS']):
             if re.match(pattern, stock):
                 descendant.append(index)
-        return np.asarray(descendant)
+        return descendant
 
     def cal_valid_start_trading_day(self, industry_stock):
         valid_start_day = {}
@@ -67,17 +69,12 @@ class Strategy:
         start_index = no_st_code_first_MktData.index.get_loc(start)
         end_index = start_index+time_period
         descendant = self.get_industry_descendant(industry_code, industry_order)
-        industry_all = pd.DataFrame()
-        for stock in descendant:
-            try:
-                industry_all[stock] = no_st_code_first_MktData[stock]['ret'].iloc[start_index:end_index+1]
-            except KeyError:
-                continue
+        industry_all = no_st_code_first_MktData.loc[start:no_st_code_first_MktData.index[end_index], (descendant, 'ret')]
         na_free_industry_all = industry_all.dropna(axis=1, how='any')
         na_free_industry_all.index = no_st_code_first_MktData.index[start_index:end_index+1]
-        na_free_industry_index = na_free_industry_all.mean(axis=1, skipna=True)
-        na_free_extra_stock_performance = na_free_industry_all.sub(na_free_industry_index, axis=0)
-        return na_free_industry_index, na_free_extra_stock_performance
+        industry_index = na_free_industry_all.mean(axis=1, skipna=True)
+        extra_stock_performance = na_free_industry_all.sub(industry_index, axis=0)
+        return industry_index, extra_stock_performance
 
 # 计算对应于从某一天开始的30个标准交易日后的真实超额收益，用以和预测超额收益进行对比
     def cal_real_extra_performance(self, industry_code='720000', start='2016-01-01', time_period=30, industry_order=3):
@@ -86,28 +83,24 @@ class Strategy:
         predict_datetimne = no_st_code_first_MktData.index[end_index]
         real_index = start_index + time_period + 1
         descendant = self.get_industry_descendant(industry_code, industry_order)
-        industry_all = pd.DataFrame()
-        for stock in descendant:
-            try:
-                industry_all[stock] = no_st_code_first_MktData[stock]['ret'].iloc[start_index:end_index+1]
-            except KeyError:
-                continue
+        industry_all = no_st_code_first_MktData.loc[start:no_st_code_first_MktData.index[end_index], (descendant, 'ret')]
         na_free_industry_all = industry_all.dropna(axis=1, how='any')
-        na_dropped_stock = industry_all.columns[~industry_all.columns.isin(na_free_industry_all.columns)]
-        no_na_descendant = [item for item in descendant if item not in na_dropped_stock]
-        industry_index = 0
-        count = 0
-        stock_ret = pd.Series(index=no_na_descendant)
-        NaN_stock = []
-        for stock in no_na_descendant:
-            ret = no_st_code_first_MktData[stock]['ret'].iloc[real_index]
-            stock_ret[stock] = ret
-            if ret != ret:
-                NaN_stock.append(stock)
-            else:
-                count += 1
-                industry_index += ret
-        real_extra_performace = stock_ret - industry_index/count
+        na_dropped_stock = list(industry_all.columns[industry_all.columns.isin(na_free_industry_all.columns)])
+        # no_na_descendant = [item for item in descendant if item not in na_dropped_stock]
+        # industry_index = 0
+        # count = 0
+        # stock_ret = pd.Series(index=no_na_descendant)
+        # NaN_stock = []
+        # for stock in no_na_descendant:
+        #     ret = no_st_code_first_MktData[stock]['ret'].iloc[real_index]
+        #     stock_ret[stock] = ret
+        #     if ret != ret:
+        #         NaN_stock.append(stock)
+        #     else:
+        #         count += 1
+        #         industry_index += ret
+        real_ret = no_st_code_first_MktData.loc[no_st_code_first_MktData.index[real_index], (na_dropped_stock, 'ret')]
+        real_extra_performace = real_ret - real_ret.mean()
         return real_extra_performace, predict_datetimne
 
     def arma_forecast(self, ts,  p, q):
@@ -144,10 +137,10 @@ if __name__ == '__main__':
     industry_code_i = '720000'
     time_period_i = 30
     industry_order_i = 3
-    rng = pd.date_range(start='2016-01-01', end='2018-01-01', freq='1D')
+    rng = pd.date_range(start='2016-01-01', end='2016-03-01', freq='1D')
     delta = timedelta(30)
     predict_start = datetime(2016, 1, 1) + delta
-    predict_end = datetime(2018, 1, 1) + delta
+    predict_end = datetime(2016, 3, 1) + delta
     rng2 = pd.date_range(start=predict_start, end=predict_end, freq='1D')
     test = Strategy(industry_code_i, '2016-01-01', time_period_i, industry_order_i)
     test_descendant = test.get_industry_descendant(industry_code=industry_code_i, industry_order=3)
@@ -190,8 +183,8 @@ if __name__ == '__main__':
             continue
     factor_ts = factor_ts.dropna(axis=0, how='all')
     factor_real_ts = factor_real_ts.dropna(axis=0, how='all')
-    ts_stats_info.to_pickle(r'D:/sync/Factor/ts_stats_info.pkl')
-    factor_ts.to_pickle(r'D:/sync/Factor/factor_ts.pkl')
-    factor_real_ts.to_pickle(r'D:/sync/Factor/factor_real_ts.pkl')
+    ts_stats_info.to_pickle(r'D:/sync/Factor/v4/ts_stats_info.pkl')
+    factor_ts.to_pickle(r'D:/sync/Factor/v4/factor_ts.pkl')
+    factor_real_ts.to_pickle(r'D:/sync/Factor/v4/factor_real_ts.pkl')
 
 
