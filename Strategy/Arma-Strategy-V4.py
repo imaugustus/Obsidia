@@ -16,7 +16,6 @@ import numpy
 from pandas import tseries
 
 
-
 intern = pickle.load(open(r'D:/Data/intern.pkl', 'rb'))
 MktData = intern['MktData']
 InstrumentInfo = intern['InstrumentInfo']
@@ -77,7 +76,7 @@ class Strategy:
         return industry_index, extra_stock_performance
 
 # 计算对应于从某一天开始的30个标准交易日后的真实超额收益，用以和预测超额收益进行对比
-    def cal_real_extra_performance(self, industry_code='720000', start='2016-01-01', time_period=30, industry_order=3):
+    def cal_real_extra_performance(self, industry_code='720000', start='2016-01-04', time_period=30, industry_order=3):
         start_index = no_st_code_first_MktData.index.get_loc(start)
         end_index = start_index + time_period
         real_index = start_index + time_period + 1
@@ -125,7 +124,7 @@ class Strategy:
 
 if __name__ == '__main__':
     ts_stats_info = pd.DataFrame(columns=['Square_loss_sum', 'Corr', 'Precision', 'Mean', 'Std', 'Skew', 'Kurt'], dtype='float')
-    industry_code_i = '720000'
+    industry_code_i = '480000'
     time_period_i = 30
     industry_order_i = 3
     start = '2016-01-04'
@@ -182,8 +181,8 @@ if __name__ == '__main__':
             continue
     factor_train_ts = factor_train_ts.dropna(axis=0, how='all')
     factor_predict_ts = factor_predict_ts.dropna(axis=0, how='all')
-    ts_stats_info.to_pickle(r'D:/sync/Factor/v4/ts_stats_info.pkl')
-    factor_train_ts.to_pickle(r'D:/sync/Factor/v4/factor_train_ts.pkl')
-    factor_predict_ts.to_pickle(r'D:/sync/Factor/v4/factor_predict_ts.pkl')
+    ts_stats_info.to_pickle(r'D:/sync/Factor/v4/ts_stats_info_{}.pkl'.format(industry_code_i))
+    factor_train_ts.to_pickle(r'D:/sync/Factor/v4/factor_train_ts_{}.pkl'.format(industry_code_i))
+    factor_predict_ts.to_pickle(r'D:/sync/Factor/v4/factor_predict_ts_{}.pkl'.format(industry_code_i))
 
 

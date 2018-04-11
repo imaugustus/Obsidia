@@ -13,7 +13,8 @@ from scipy.stats import mstats
 intern = pickle.load(open(r'D:/Data/intern.pkl', 'rb'))
 MktData = intern['MktData']
 MktData = MktData.swaplevel(0, 1, axis=1)
-factor = pickle.load(open(r'D:/sync/Factor/v4/factor_predict_ts.pkl', 'rb'))
+industry_code = '720000'
+factor = pickle.load(open(r'D:/sync/Factor/v4/factor_predict_ts_{}.pkl'.format(industry_code), 'rb'))
 factor = factor.dropna(axis=1, how='all')
 # factor_real = pickle.load(open(r'D:/sync/Factor/v4/factor_train_ts.pkl', 'rb'))
 # factor_real = factor.dropna(axis=1, how='all')
@@ -183,9 +184,9 @@ class Regression:
 
 
 if __name__ == '__main__':
-    test_group = Group('720000')
+    test_group = Group(industry_code)
     p_f = test_group.preprocess_factor(factor)
     group_return_ts = test_group.plot_group_cumsum_ret(ts=p_f)
     group_extra_performance_ts = test_group.plot_group_extra_performance(ts=p_f)
-    # test_regression = Regression('720000')
-    # Weights, IC, IR = test_regression.get_factor_load()
+    test_regression = Regression('720000')
+    Weights, IC, IR = test_regression.get_factor_load()
