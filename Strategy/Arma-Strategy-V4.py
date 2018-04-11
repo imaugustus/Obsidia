@@ -37,7 +37,7 @@ no_st_code_first_MktData, dropped_code = drop_st()
 
 
 class Strategy:
-    def __init__(self, industry_code='720000', start='2017-01-03', time_period=20, industry_order=3):
+    def __init__(self, industry_code='720000', start='2016-01-04', time_period=30, industry_order=3):
         self.industry_code = industry_code
         self.start = start
         self.time_period = time_period
@@ -70,8 +70,8 @@ class Strategy:
         end_index = start_index+time_period
         descendant = self.get_industry_descendant(industry_code, industry_order)
         industry_all = no_st_code_first_MktData.loc[start:no_st_code_first_MktData.index[end_index], (descendant, 'ret')]
+        industry_all.columns = industry_all.columns.droplevel(level=1)
         na_free_industry_all = industry_all.dropna(axis=1, how='any')
-        na_free_industry_all.index = no_st_code_first_MktData.index[start_index:end_index+1]
         industry_index = na_free_industry_all.mean(axis=1, skipna=True)
         extra_stock_performance = na_free_industry_all.sub(industry_index, axis=0)
         return industry_index, extra_stock_performance
@@ -80,26 +80,16 @@ class Strategy:
     def cal_real_extra_performance(self, industry_code='720000', start='2016-01-01', time_period=30, industry_order=3):
         start_index = no_st_code_first_MktData.index.get_loc(start)
         end_index = start_index + time_period
-        predict_datetimne = no_st_code_first_MktData.index[end_index]
         real_index = start_index + time_period + 1
+        predict_datetimne = no_st_code_first_MktData.index[real_index]
         descendant = self.get_industry_descendant(industry_code, industry_order)
         industry_all = no_st_code_first_MktData.loc[start:no_st_code_first_MktData.index[end_index], (descendant, 'ret')]
+        industry_all.columns = industry_all.columns.droplevel(level=1)
         na_free_industry_all = industry_all.dropna(axis=1, how='any')
-        na_dropped_stock = list(industry_all.columns[industry_all.columns.isin(na_free_industry_all.columns)])
-        # no_na_descendant = [item for item in descendant if item not in na_dropped_stock]
-        # industry_index = 0
-        # count = 0
-        # stock_ret = pd.Series(index=no_na_descendant)
-        # NaN_stock = []
-        # for stock in no_na_descendant:
-        #     ret = no_st_code_first_MktData[stock]['ret'].iloc[real_index]
-        #     stock_ret[stock] = ret
-        #     if ret != ret:
-        #         NaN_stock.append(stock)
-        #     else:
-        #         count += 1
-        #         industry_index += ret
-        real_ret = no_st_code_first_MktData.loc[no_st_code_first_MktData.index[real_index], (na_dropped_stock, 'ret')]
+        na_dropped_stock = industry_all.columns[~industry_all.columns.isin(na_free_industry_all.columns)]
+        no_na_descendant = [item for item in descendant if item not in na_dropped_stock]
+        real_ret = no_st_code_first_MktData.loc[no_st_code_first_MktData.index[real_index], (no_na_descendant, 'ret')]
+        real_ret.index = real_ret.index.droplevel(level=1)
         real_extra_performace = real_ret - real_ret.mean()
         return real_extra_performace, predict_datetimne
 
@@ -123,13 +113,14 @@ class Strategy:
                                                     time_period=self.time_period, industry_order=self.industry_order)
         predict_factor = pd.DataFrame(index=extra_stock_performance.columns, columns=['Estimated', 'Real', 'Rightness'],dtype='float')
         strategy_summary = {}
+        assert extra_stock_performance.columns.any(), real_extra_performance.index.any()
         for i, stock in enumerate(extra_stock_performance.columns):
             predict_extra_performance, stock_summary = self.arma_forecast(extra_stock_performance[stock], 1, 0)
             strategy_summary[stock] = stock_summary
             predict_factor.loc[stock, 'Estimated'] = float(predict_extra_performance)
             predict_factor.loc[stock, 'Real'] = real_extra_performance[stock]
             predict_factor.loc[stock, 'Rightness'] = 1 if float(predict_extra_performance)*real_extra_performance[stock] > 0 else -1
-        return predict_factor, strategy_summary
+        return predict_factor, predict_datetime, strategy_summary
 
 
 if __name__ == '__main__':
@@ -137,25 +128,33 @@ if __name__ == '__main__':
     industry_code_i = '720000'
     time_period_i = 30
     industry_order_i = 3
-    rng = pd.date_range(start='2016-01-01', end='2016-03-01', freq='1D')
-    delta = timedelta(30)
-    predict_start = datetime(2016, 1, 1) + delta
-    predict_end = datetime(2016, 3, 1) + delta
-    rng2 = pd.date_range(start=predict_start, end=predict_end, freq='1D')
-    test = Strategy(industry_code_i, '2016-01-01', time_period_i, industry_order_i)
+    start = '2016-01-04'
+    end = '2018-01-04'
+    start_index = no_st_code_first_MktData.index.get_loc(start)
+    end_index = no_st_code_first_MktData.index.get_loc(end)
+    delta = 31
+    predict_start_index = start_index + delta
+    predict_end_index = end_index + delta
+    predict_start_traing_date = no_st_code_first_MktData.index[predict_start_index]
+    predict_end_traing_date = no_st_code_first_MktData.index[predict_end_index]
+    rng_train = no_st_code_first_MktData.index[start_index:end_index]
+    rng_predict = no_st_code_first_MktData.index[predict_start_index:predict_end_index]
+    test = Strategy(industry_code_i, start, time_period_i, industry_order_i)
     test_descendant = test.get_industry_descendant(industry_code=industry_code_i, industry_order=3)
-    factor_ts = pd.DataFrame(columns=test_descendant, index=rng2)
-    factor_real_ts = pd.DataFrame(columns=test_descendant, index=rng)
-    for j in range(len(rng)):
-        start_date = rng[j]
-        predict_date = rng2[j]
+    factor_train_ts = pd.DataFrame(columns=test_descendant, index=rng_train)
+    factor_predict_ts = pd.DataFrame(columns=test_descendant, index=rng_predict)
+    for i, date in enumerate(rng_train):
+        train_start_date = rng_train[i]
+        predict_date = rng_predict[i]
         try:
-            strategy = Strategy(industry_code_i, start_date, time_period_i, industry_order_i)
-            factor, summary = strategy.train_forecast()
+            strategy = Strategy(industry_code_i, train_start_date, time_period_i, industry_order_i)
+            factor, predict_datetime, summary = strategy.train_forecast()
+            print("Predicting factor of {}".format(predict_date))
+            assert predict_date == predict_datetime
             for stock in factor.index:
                 try:
-                    factor_ts.loc[predict_date, stock] = factor.loc[stock, 'Estimated']
-                    factor_real_ts.loc[start_date, stock] = factor.loc[stock, 'Real']
+                    factor_predict_ts.loc[predict_date, stock] = factor.loc[stock, 'Estimated']
+                    factor_train_ts.loc[predict_date, stock] = factor.loc[stock, 'Real']
                 except KeyError:
                     continue
                 except ValueError:
@@ -181,10 +180,10 @@ if __name__ == '__main__':
             ts_stats_info.loc[predict_date, 'Kurt'] = Kurt
         except KeyError:
             continue
-    factor_ts = factor_ts.dropna(axis=0, how='all')
-    factor_real_ts = factor_real_ts.dropna(axis=0, how='all')
+    factor_train_ts = factor_train_ts.dropna(axis=0, how='all')
+    factor_predict_ts = factor_predict_ts.dropna(axis=0, how='all')
     ts_stats_info.to_pickle(r'D:/sync/Factor/v4/ts_stats_info.pkl')
-    factor_ts.to_pickle(r'D:/sync/Factor/v4/factor_ts.pkl')
-    factor_real_ts.to_pickle(r'D:/sync/Factor/v4/factor_real_ts.pkl')
+    factor_train_ts.to_pickle(r'D:/sync/Factor/v4/factor_train_ts.pkl')
+    factor_predict_ts.to_pickle(r'D:/sync/Factor/v4/factor_predict_ts.pkl')
 
 

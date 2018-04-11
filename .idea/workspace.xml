@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a502ea9c-00c7-4655-9434-661ccf8edec4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Strategy/Arma-Strategy-V4.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Factor/ts_stats_info.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/Factor/ts_stats_info.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Strategy/Arma-Strategy-V3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/Arma-Strategy-V3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Factor/factor.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Factor/factor_real_ts.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Factor/factor_ts.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Factor/ts_stats_info.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Factor/v4/factor_real_ts.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Factor/v4/factor_ts.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Factor/v4/ts_stats_info.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/Factor/v4/ts_stats_info.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Strategy/Arma-Strategy-V4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/Arma-Strategy-V4.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Strategy/Factor-Analysize.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/Factor-Analysize.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,8 +43,8 @@
       <file leaf-file-name="Factor-Analysize.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="81" column="30" lean-forward="true" selection-start-line="81" selection-start-column="30" selection-end-line="81" selection-end-column="30" />
+            <state relative-caret-position="238">
+              <caret line="102" selection-start-line="102" selection-end-line="102" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -50,8 +55,8 @@
       <file leaf-file-name="Arma-Strategy-V4.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-50">
-              <caret line="91" column="55" lean-forward="true" selection-start-line="91" selection-start-column="55" selection-end-line="91" selection-end-column="55" />
+            <state relative-caret-position="-1654">
+              <caret line="41" column="26" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -68,6 +73,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>predict_datetime</find>
+      <find>droplevel</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -121,6 +127,12 @@
               <item name="sync" type="b2602c69:ProjectViewProjectNode" />
               <item name="sync" type="462c0819:PsiDirectoryNode" />
               <item name="Factor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sync" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sync" type="462c0819:PsiDirectoryNode" />
+              <item name="Factor" type="462c0819:PsiDirectoryNode" />
+              <item name="v4" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sync" type="b2602c69:ProjectViewProjectNode" />
@@ -307,20 +319,30 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3293348" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3293348" />
-      <window_info anchor="bottom" x="2167" y="322" width="1091" height="699" id="Python Console" order="7" sideWeight="0.14978679" side_tool="true" type="WINDOWED" visible="true" weight="0.36928105" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8502132" visible="true" weight="0.17211328" />
+      <window_info anchor="bottom" x="2740" y="216" width="1091" height="699" id="Python Console" order="7" sideWeight="0.14978679" side_tool="true" type="WINDOWED" visible="true" weight="0.36928105" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8502132" visible="true" weight="0.28867102" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2217484" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15191898" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.7782516" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
+      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.5597015" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991276" />
@@ -330,7 +352,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,6 +371,16 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="42" column="17" lean-forward="true" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1853">
@@ -443,22 +474,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-242">
-          <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
+        <state relative-caret-position="286">
+          <caret line="68" column="42" lean-forward="true" selection-start-line="68" selection-start-column="42" selection-end-line="68" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-50">
-          <caret line="91" column="55" lean-forward="true" selection-start-line="91" selection-start-column="55" selection-end-line="91" selection-end-column="55" />
+        <state relative-caret-position="-1654">
+          <caret line="41" column="26" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="81" column="30" lean-forward="true" selection-start-line="81" selection-start-column="30" selection-end-line="81" selection-end-column="30" />
+        <state relative-caret-position="238">
+          <caret line="102" selection-start-line="102" selection-end-line="102" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
