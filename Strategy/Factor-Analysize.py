@@ -16,8 +16,8 @@ MktData = MktData.swaplevel(0, 1, axis=1)
 industry_code = '720000'
 factor = pickle.load(open(r'D:/sync/Factor/v4/factor_predict_ts_{}.pkl'.format(industry_code), 'rb'))
 factor = factor.dropna(axis=1, how='all')
-# factor_real = pickle.load(open(r'D:/sync/Factor/v4/factor_train_ts.pkl', 'rb'))
-# factor_real = factor.dropna(axis=1, how='all')
+factor_real = pickle.load(open(r'D:/sync/Factor/v4/factor_train_ts_{}.pkl'.format(industry_code), 'rb'))
+factor_real = factor_real.dropna(axis=1, how='all')
 
 
 class Group:
@@ -66,6 +66,7 @@ class Group:
                 group_ret_mean = MktData.loc[date, (group_stock, 'ret')].mean()
                 group_ret_ts.loc[date, group_label] = group_ret_mean
         group_ret_ts.cumsum().plot()
+        plt.title("Cumsum Ret of Each Group Classified By factor")
         plt.show()
         return group_ret_ts.cumsum()
 
@@ -80,8 +81,55 @@ class Group:
                 group_extra_performance = MktData.loc[date, (group_stock, 'ret')].mean() - gb_index
                 group_extra_performance_ts.loc[date, group_label] = group_extra_performance
         group_extra_performance_ts.cumsum().plot()
+        plt.title("Extra Peformance With Regard To Industry Average")
         plt.show()
         return group_extra_performance_ts.cumsum()
+
+    # 检查因子的有效性
+    def check_factor_efficiency(self, ts):
+        mul_mean_ts = pd.DataFrame(index=ts.index, columns=['G-5', 'G-4', 'G-3', 'G-2', 'G-1'])
+        for date in ts.index:
+            gb = ts.loc[date, :].groupby(pd.cut(ts.loc[date, :], bins=5, labels=['G-5', 'G-4', 'G-3', 'G-2', 'G-1'], retbins=False))
+            for group_label in gb.groups.keys():
+                group_stock = list(gb.groups[group_label])
+                today_ret = MktData.loc[date, (group_stock, 'ret')]
+                today_ret.index = today_ret.index.droplevel(level=1)
+                today_index = MktData.index.get_loc(date)
+                tommor_index = today_index + 1
+                tomorrow_ret = MktData.loc[MktData.index[tommor_index], (group_stock, 'ret')]
+                tomorrow_ret.index = tomorrow_ret.index.droplevel(level=1)
+                delta = tomorrow_ret - today_ret
+                f = ts.loc[date, group_stock]
+                mul = f.multiply(delta)
+                mul_sum = mul.sum()
+                mul_mean = mul.mean()
+                mul_mean_ts.loc[date, group_label] = mul_mean
+        mul_mean_ts.cumsum().plot()
+        plt.show()
+        return mul_mean_ts.cumsum()
+
+    # 检查预测因子的有效性
+    def check_factor_predict_efficiency(self, ts):
+        mul_mean_predict_ts = pd.DataFrame(index=ts.index, columns=['G-5', 'G-4', 'G-3', 'G-2', 'G-1'])
+        for date in ts.index:
+            gb = ts.loc[date, :].groupby(pd.cut(ts.loc[date, :], bins=5, labels=['G-5', 'G-4', 'G-3', 'G-2', 'G-1'], retbins=False))
+            for group_label in gb.groups.keys():
+                group_stock = list(gb.groups[group_label])
+                today_ret = MktData.loc[date, (group_stock, 'ret')]
+                today_ret.index = today_ret.index.droplevel(level=1)
+                today_index = MktData.index.get_loc(date)
+                tommor_index = today_index + 1
+                tomorrow_ret = MktData.loc[MktData.index[tommor_index], (group_stock, 'ret')]
+                tomorrow_ret.index = tomorrow_ret.index.droplevel(level=1)
+                delta = tomorrow_ret - today_ret
+                f = ts.loc[date, group_stock]
+                mul = f.multiply(delta)
+                mul_sum = mul.sum()
+                mul_mean = mul.mean()
+                mul_mean_predict_ts.loc[date, group_label] = mul_mean
+        mul_mean_predict_ts.cumsum().plot()
+        plt.show()
+        return mul_mean_predict_ts.cumsum()
 
 
 class Regression:
@@ -182,11 +230,19 @@ class Regression:
         IR = IC.mean()/IC.std()
         return weights, IC, IR
 
+    def predict_ret_by_factor(self):
+        return
+
 
 if __name__ == '__main__':
     test_group = Group(industry_code)
     p_f = test_group.preprocess_factor(factor)
-    group_return_ts = test_group.plot_group_cumsum_ret(ts=p_f)
-    group_extra_performance_ts = test_group.plot_group_extra_performance(ts=p_f)
+    p_f_r = test_group.preprocess_factor(factor_real)
+    group_return_ts = test_group.plot_group_cumsum_ret(ts=p_f_r)
+    group_return_ts_p = test_group.plot_group_cumsum_ret(ts=p_f)
+    group_extra_performance_ts = test_group.plot_group_extra_performance(ts=p_f_r)
+    group_extra_performance_ts_p = test_group.plot_group_extra_performance(ts=p_f)
+    mul_mena_ts = test_group.check_factor_efficiency(p_f_r)
+    mul_mena_predict_ts = test_group.check_factor_efficiency(p_f)
     test_regression = Regression('720000')
     Weights, IC, IR = test_regression.get_factor_load()
