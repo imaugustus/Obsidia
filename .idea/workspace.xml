@@ -35,8 +35,8 @@
       <file leaf-file-name="Factor-Analysize.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="235" lean-forward="true" selection-start-line="235" selection-end-line="235" />
+            <state relative-caret-position="203">
+              <caret line="322" column="26" lean-forward="true" selection-start-line="322" selection-start-column="26" selection-end-line="322" selection-end-column="26" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -57,6 +57,7 @@
     <findStrings>
       <find>predict_datetime</find>
       <find>droplevel</find>
+      <find>clf</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -80,7 +81,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="45" />
     <option name="y" value="44" />
     <option name="width" value="1746" />
@@ -253,7 +254,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="pd" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="kalmanfilter" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="sync" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -261,12 +262,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\ProgramData\Anaconda3\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TestNewLib" />
+      <option name="WORKING_DIRECTORY" value="C:/ProgramData/Anaconda3/Lib/site-packages/statsmodels/tsa/kalmanf" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TestNewLib/pd.py" />
+      <option name="SCRIPT_NAME" value="C:/ProgramData/Anaconda3/Lib/site-packages/statsmodels/tsa/kalmanf/kalmanfilter.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -274,18 +275,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.Arma-Strategy-V2" />
-      <item itemvalue="Python.pd" />
-      <item itemvalue="Python.Factor-Analysize" />
       <item itemvalue="Python.Arma-Strategy-V3" />
       <item itemvalue="Python.Arma-Strategy-V4" />
+      <item itemvalue="Python.Factor-Analysize" />
+      <item itemvalue="Python.kalmanfilter" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.Factor-Analysize" />
+        <item itemvalue="Python.kalmanfilter" />
         <item itemvalue="Python.Arma-Strategy-V4" />
         <item itemvalue="Python.Arma-Strategy-V3" />
         <item itemvalue="Python.Arma-Strategy-V2" />
-        <item itemvalue="Python.pd" />
       </list>
     </recent_temporary>
   </component>
@@ -318,13 +319,13 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3293348" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3293348" />
-      <window_info anchor="bottom" x="2740" y="216" width="1091" height="699" id="Python Console" order="7" sideWeight="0.14978679" side_tool="true" type="WINDOWED" weight="0.36928105" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8502132" visible="true" weight="0.291939" />
+      <window_info anchor="bottom" x="2392" y="208" width="1091" height="699" id="Python Console" order="7" sideWeight="0.14978679" side_tool="true" type="WINDOWED" visible="true" weight="0.36928105" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8502132" visible="true" weight="0.54357296" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15511727" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11513859" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.42110875" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.32782516" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991276" />
@@ -354,6 +355,26 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4760">
+          <caret line="280" column="52" selection-start-line="280" selection-start-column="52" selection-end-line="280" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3995">
+          <caret line="235" lean-forward="true" selection-start-line="235" selection-end-line="235" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4046">
@@ -491,15 +512,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255">
+        <state relative-caret-position="128">
           <caret line="130" column="22" selection-start-line="130" selection-start-column="22" selection-end-line="130" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/statsmodels/tsa/kalmanf/kalmanfilter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="647" column="73" lean-forward="true" selection-start-line="647" selection-start-column="73" selection-end-line="647" selection-end-column="73" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="235" lean-forward="true" selection-start-line="235" selection-end-line="235" />
+        <state relative-caret-position="203">
+          <caret line="322" column="26" lean-forward="true" selection-start-line="322" selection-start-column="26" selection-end-line="322" selection-end-column="26" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

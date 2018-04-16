@@ -9,6 +9,7 @@ import math
 from datetime import datetime
 import matplotlib.pyplot as plt
 from scipy.stats import mstats
+from statsmodels.tsa.arima_model import ARMA
 
 intern = pickle.load(open(r'D:/Data/intern.pkl', 'rb'))
 MktData = intern['MktData']
@@ -157,6 +158,17 @@ class Regression:
         factor_section = factor_section.fillna(0)
         return factor_section
 
+    # 预处理因子
+    def preprocess_factor(self, factor):
+        preprocessed_factor = pd.DataFrame(index=factor.index, columns=factor.columns)
+        for date in factor.index:
+            section_factor = factor.loc[date, :]
+            section_factor = self.filter_extreme(section_factor)
+            section_factor = self.normalize(section_factor)
+            section_factor = self.fill_na(section_factor)
+            preprocessed_factor.loc[date, :] = section_factor
+        return preprocessed_factor
+
 # # 获取截面期因子暴露以及下个截面期收益
 #     def get_train_data(self, factor_ts):
 #         stock = list(factor_ts.columns)
@@ -199,15 +211,6 @@ class Regression:
                 continue
         return all_section_factor_x, all_section_ret_y
 
-# 预处理因子
-    def preprocess_factor(self, all_section_factor_x):
-        preprocessed_all_section_factor_x = []
-        for section_factor in all_section_factor_x:
-            section_factor = self.filter_extreme(section_factor)
-            section_factor = self.normalize(section_factor)
-            section_factor = self.fill_na(section_factor)
-            preprocessed_all_section_factor_x.append(section_factor)
-        return preprocessed_all_section_factor_x
 
 #线性回归以求得因子系数(因子载荷)
     def get_factor_load(self):
@@ -230,19 +233,110 @@ class Regression:
         IR = IC.mean()/IC.std()
         return weights, IC, IR
 
-    def predict_ret_by_factor(self):
-        return
+# 平均法预测因子收益
+    def multi_regression_average(self, factor_ts, Mkt_ts, date, param_df, previous_load_count):
+        gb = factor_ts.loc[date, :].groupby(pd.cut(factor_ts.loc[date, :], bins=5, labels=['G-5', 'G-4', 'G-3', 'G-2', 'G-1'], retbins=False))
+        today_factor_index = factor_ts.index.get_loc(date)
+        today_ret_index = Mkt_ts.index.get_loc(date)
+        tommorrow_ret_index = today_ret_index + 1
+        for key in gb.groups.keys():
+            group_stock = list(gb.groups[key])
+            today_factor_exposure = factor_ts.loc[date, group_stock]
+            tommorrow_ret = Mkt_ts.loc[Mkt_ts.index[tommorrow_ret_index], (group_stock, 'ret')]
+            tommorrow_ret.index = tommorrow_ret.index.droplevel(level=1)
+            weights = 0
+            intercept = 0
+            for factor_index, mkt_index in zip(range(today_factor_index, today_factor_index-previous_load_count-1, -1), range(today_ret_index, today_ret_index-previous_load_count-1, -1)):
+                assert Mkt_ts.index[mkt_index] == factor_ts.index[factor_index]
+                assert Mkt_ts.index[mkt_index+1] == factor_ts.index[factor_index+1]
+                temp_factor_exposure = factor_ts.loc[factor_ts.index[factor_index - 1], group_stock]
+                temp_factor_exposure = temp_factor_exposure.fillna(0)
+                temp_mkt_ret = Mkt_ts.loc[Mkt_ts.index[mkt_index], (group_stock, 'ret')]
+                temp_mkt_ret = temp_mkt_ret.fillna(0)
+                temp_mkt_ret.index = temp_mkt_ret.index.droplevel(level=1)
+                try:
+                    clf = LinearRegression()
+                    clf.fit(np.array(temp_factor_exposure).reshape(-1, 1), temp_mkt_ret)
+                    weights += clf.coef_[0]
+                    intercept += clf.intercept_
+                except ValueError:
+                    print(temp_factor_exposure.isna())
+                    print(temp_mkt_ret.isna())
+            weights /= previous_load_count
+            intercept /= previous_load_count
+            param_df.loc[previous_load_count, (key, 'weights')] = weights
+            param_df.loc[previous_load_count, (key, 'intercept')] = intercept
+            predict_tommorrow_ret = weights*today_factor_exposure + intercept
+            mul = tommorrow_ret*predict_tommorrow_ret
+            directioin_precision = (mul > 0).sum()/len(mul)
+            print(key, directioin_precision)
+
+
+# 时间序列预测因子收益
+    def multi_regression_arma(self, factor_ts, Mkt_ts, date, param_df, previous_load_count=300):
+        gb = factor_ts.loc[date, :].groupby(pd.cut(factor_ts.loc[date, :], bins=5, labels=['G-5', 'G-4', 'G-3', 'G-2', 'G-1'], retbins=False))
+        today_factor_index = factor_ts.index.get_loc(date)
+        today_ret_index = Mkt_ts.index.get_loc(date)
+        tommorrow_ret_index = today_ret_index + 1
+        for key in gb.groups.keys():
+            group_stock = list(gb.groups[key])
+            today_factor_exposure = factor_ts.loc[date, group_stock]
+            tommorrow_ret = Mkt_ts.loc[Mkt_ts.index[tommorrow_ret_index], (group_stock, 'ret')]
+            tommorrow_ret.index = tommorrow_ret.index.droplevel(level=1)
+            weights_ts = []
+            intercept_ts = []
+            for factor_index, mkt_index in zip(range(today_factor_index, today_factor_index-previous_load_count-1, -1), range(today_ret_index, today_ret_index-previous_load_count-1, -1)):
+                assert Mkt_ts.index[mkt_index] == factor_ts.index[factor_index]
+                assert Mkt_ts.index[mkt_index+1] == factor_ts.index[factor_index+1]
+                temp_factor_exposure = factor_ts.loc[factor_ts.index[factor_index - 1], group_stock]
+                temp_factor_exposure = temp_factor_exposure.fillna(0)
+                temp_mkt_ret = Mkt_ts.loc[Mkt_ts.index[mkt_index], (group_stock, 'ret')]
+                temp_mkt_ret = temp_mkt_ret.fillna(0)
+                temp_mkt_ret.index = temp_mkt_ret.index.droplevel(level=1)
+                try:
+                    clf = LinearRegression()
+                    clf.fit(np.array(temp_factor_exposure).reshape(-1, 1), temp_mkt_ret)
+                    weights = clf.coef_[0]
+                    intercept = clf.intercept_
+                    weights_ts.append(weights)
+                    intercept_ts.append(intercept)
+                except ValueError:
+                    print(temp_factor_exposure.isna())
+                    print(temp_mkt_ret.isna())
+            for p in range(1, 30):
+                arma_weights = ARMA(weights_ts, order=(p, 0)).fit(disp=-1)
+                predict_factor_ret = np.asscalar(arma_weights.forecast(1)[0])
+                arma_intercept = ARMA(intercept_ts, order=(p, 0)).fit(disp=-1)
+                predict_factor_intercept = np.asscalar(arma_intercept.forecast(1)[0])
+                param_df.loc[p, (key, 'weights')] = predict_factor_ret
+                param_df.loc[p, (key, 'intercept')] = predict_factor_intercept
+                predict_ret = predict_factor_ret*today_factor_exposure+predict_factor_intercept
+                mul = tommorrow_ret*predict_ret
+                precision = (mul > 0).sum()/len(mul)
+                print(key, precision)
 
 
 if __name__ == '__main__':
-    test_group = Group(industry_code)
-    p_f = test_group.preprocess_factor(factor)
-    p_f_r = test_group.preprocess_factor(factor_real)
-    group_return_ts = test_group.plot_group_cumsum_ret(ts=p_f_r)
-    group_return_ts_p = test_group.plot_group_cumsum_ret(ts=p_f)
-    group_extra_performance_ts = test_group.plot_group_extra_performance(ts=p_f_r)
-    group_extra_performance_ts_p = test_group.plot_group_extra_performance(ts=p_f)
-    mul_mena_ts = test_group.check_factor_efficiency(p_f_r)
-    mul_mena_predict_ts = test_group.check_factor_efficiency(p_f)
+    # test_group = Group(industry_code)
+    # p_f = test_group.preprocess_factor(factor)
+    # p_f_r = test_group.preprocess_factor(factor_real)
+    # group_return_ts = test_group.plot_group_cumsum_ret(ts=p_f_r)
+    # group_return_ts_p = test_group.plot_group_cumsum_ret(ts=p_f)
+    # group_extra_performance_ts = test_group.plot_group_extra_performance(ts=p_f_r)
+    # group_extra_performance_ts_p = test_group.plot_group_extra_performance(ts=p_f)
+    # mul_mena_ts = test_group.check_factor_efficiency(p_f_r)
+    # mul_mena_predict_ts = test_group.check_factor_efficiency(p_f)
     test_regression = Regression('720000')
-    Weights, IC, IR = test_regression.get_factor_load()
+    # p_f = test_regression.preprocess_factor(factor_real)
+    # average_param_df = pd.DataFrame(index=range(1, 150),
+    #             columns=pd.MultiIndex.from_product([['G-5', 'G-4', 'G-3', 'G-2', 'G-1'],['weights', 'intercept']]))
+    arma_param_df = pd.DataFrame(index=range(1, 30),
+                columns=pd.MultiIndex.from_product([['G-5', 'G-4', 'G-3', 'G-2', 'G-1'],['weights', 'intercept']]))
+    # for i in range(1, 150):
+    #     test_regression.multi_regression_average(factor_real, MktData, '2018-01-29', param_df=average_param_df, previous_load_count=i)
+    test_regression.multi_regression_arma(factor_real, MktData, '2018-01-29', param_df=arma_param_df,
+                                          previous_load_count=300)
+    # average_param_df.plot()
+    # plt.show()
+    arma_param_df.plot()
+    plt.show()
