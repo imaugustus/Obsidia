@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a502ea9c-00c7-4655-9434-661ccf8edec4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Strategy/Factor-Analysize-v2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Strategy/delta_factor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Strategy/ARMA_Strategy.md" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/ARMA_Strategy.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Strategy/Factor-Analysize.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/Factor-Analysize.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Strategy/Factor-Analysize-v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/Factor-Analysize-v2.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -38,8 +34,8 @@
       <file leaf-file-name="Factor-Analysize-v2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2443">
-              <caret line="89" selection-start-line="89" selection-end-line="89" />
+            <state relative-caret-position="115">
+              <caret line="142" selection-start-line="142" selection-end-line="142" />
             </state>
           </provider>
         </entry>
@@ -301,18 +297,19 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3293348" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3293348" />
       <window_info anchor="bottom" x="2392" y="208" width="1091" height="699" id="Python Console" order="7" sideWeight="0.14978679" side_tool="true" type="WINDOWED" weight="0.36928105" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8502132" visible="true" weight="0.23093683" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8502132" visible="true" weight="0.7222222" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.07942431" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.35820895" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.3763326" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991276" />
@@ -559,8 +556,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2443">
-          <caret line="89" selection-start-line="89" selection-end-line="89" />
+        <state relative-caret-position="115">
+          <caret line="142" selection-start-line="142" selection-end-line="142" />
         </state>
       </provider>
     </entry>

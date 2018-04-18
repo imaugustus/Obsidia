@@ -238,6 +238,7 @@ class Regression:
         tommorow_index = today_index + 1
         tommorow_ret = MktData.loc[MktData.index[tommorow_index], (descendant, 'ret')]
         tommorow_ret.index = tommorow_ret.index.droplevel(1)
+        IC = pd.DataFrame({"factor exposure":today_factor_exposure, "tommorow ret":tommorow_ret}).corr(method='spearman')
         for count in range(1, maximum_load_count):
             factor_ret_vector = full_factor_ret_vector[0:count]
             bias_vector = full_bias_vector[0:count]
@@ -250,7 +251,7 @@ class Regression:
             direction_precision = (predict_tommorow_ret * tommorow_ret > 0).sum() / len(tommorow_ret)
             result_df.loc[count, 'loss'] = loss
             result_df.loc[count, 'direction_precision'] = direction_precision
-        return result_df
+        return result_df, IC
 
     def summary_arma_estimate(self, maximum_p, date, count):
         factor_ret_vector, bias_vector = test_regression.get_factor_ret_vector(factor_real, date=date, count=count)
@@ -284,26 +285,31 @@ if __name__ == '__main__':
     test_maximum_load_count = 700
     test_maximum_p = 30
     test_all_count = 700
-    test_date = '2018-01-15'
+    all_test_date = list(MktData.index[-100:])
+    all_date_stats_info = {}
     all_industry_code = pickle.load(open(r'D:/sync/Factor/v5/all_industry_code.pkl', 'rb'))
-    stats_info = pd.DataFrame(index=all_industry_code, columns=['max_precision', 'min_precision', 'max_weights', 'min_weights', 'max_loss', 'min_loss'])
-    for industry_code in all_industry_code:
-        factor_real = pickle.load(open(r'D:/sync/Factor/v5/delta_factor_{}.pkl'.format(industry_code), 'rb'))
-        factor_real = factor_real.dropna(axis=1, how='all')
-        test_regression = Regression(industry_code)
-        print("-----Analysizing stock of {}-----".format(industry_code))
-        df_average = test_regression.summary_average_estiamte(test_maximum_load_count, date=test_date, count=test_all_count)
-        stats_info.loc[industry_code, 'max_precision'] = df_average['direction_precision'].max()
-        stats_info.loc[industry_code, 'min_precision'] = df_average['direction_precision'].min()
-        stats_info.loc[industry_code, 'max_weights'] = df_average['weights_predict'].max()
-        stats_info.loc[industry_code, 'min_weights'] = df_average['weights_predict'].min()
-        stats_info.loc[industry_code, 'max_loss'] = df_average['loss'].max()
-        stats_info.loc[industry_code, 'min_loss'] = df_average['loss'].min()
-        df_average.plot()
-        plt.savefig(r'D:/sync/fig/average_predict_{}.png'.format(industry_code))
-        plt.close()
-        # df_arma = test_regression.summary_arma_estimate(maximum_p=test_maximum_p, date=test_date, count=200)
-        # df_arma.plot()
-        # plt.show()
+    IC = pd.DataFrame(index=MktData.index[-100:], columns=[all_industry_code])
+    for test_date in all_test_date:
+        stats_info = pd.DataFrame(index=all_industry_code, columns=['max_precision', 'min_precision', 'max_weights', 'min_weights', 'max_loss', 'min_loss'])
+        for industry_code in all_industry_code:
+            factor_real = pickle.load(open(r'D:/sync/Factor/v5/delta_factor_{}.pkl'.format(industry_code), 'rb'))
+            factor_real = factor_real.dropna(axis=1, how='all')
+            test_regression = Regression(industry_code)
+            print("-----Analysizing stock of {} on {}-----".format(industry_code, test_date))
+            df_average, ic = test_regression.summary_average_estiamte(test_maximum_load_count, date=test_date, count=test_all_count)
+            stats_info.loc[industry_code, 'max_precision'] = df_average['direction_precision'].max()
+            stats_info.loc[industry_code, 'min_precision'] = df_average['direction_precision'].min()
+            stats_info.loc[industry_code, 'max_weights'] = df_average['weights_predict'].max()
+            stats_info.loc[industry_code, 'min_weights'] = df_average['weights_predict'].min()
+            stats_info.loc[industry_code, 'max_loss'] = df_average['loss'].max()
+            stats_info.loc[industry_code, 'min_loss'] = df_average['loss'].min()
+            IC.loc[test_date, industry_code] = ic
+            df_average.plot()
+            # plt.savefig(r'D:/sync/fig/average_predict_{}.png'.format(industry_code))
+            plt.close()
+        all_date_stats_info[test_date] = stats_info
+            # df_arma = test_regression.summary_arma_estimate(maximum_p=test_maximum_p, date=test_date, count=200)
+            # df_arma.plot()
+            # plt.show()
 
 
