@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a502ea9c-00c7-4655-9434-661ccf8edec4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Report/summary.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py" afterDir="false" />
-    </list>
+    <list default="true" id="a502ea9c-00c7-4655-9434-661ccf8edec4" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,13 +42,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Factor-Analysize-v4.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Factor-Analysize-v4.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-486">
+            <state relative-caret-position="-765">
               <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Factor-Analysize-v5.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v5.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="Factor-Analysize-v3.py" pinned="false" current-in-tab="false">
@@ -117,7 +117,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
     <option name="y" value="2" />
     <option name="width" value="1932" />
@@ -341,16 +341,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="2" width="1932" height="1045" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" weight="0.3293348" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3293348" />
       <window_info anchor="bottom" x="2392" y="208" width="1091" height="699" id="Python Console" order="10" sideWeight="0.14978679" side_tool="true" type="WINDOWED" weight="0.36928105" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8502132" visible="true" weight="0.22406182" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8502132" visible="true" weight="0.36313465" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32897604" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.08440171" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32158118" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" weight="0.32995737" />
       <window_info anchor="right" id="SciView" order="3" weight="0.5747863" />
@@ -746,10 +745,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-486">
+        <state relative-caret-position="-765">
           <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v5.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
