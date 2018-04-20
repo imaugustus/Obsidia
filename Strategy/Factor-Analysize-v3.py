@@ -256,7 +256,7 @@ class Regression:
     def summary_arma_estimate(self, maximum_p, date, count):
         factor_ret_vector, bias_vector = test_regression.get_factor_ret_vector(factor_real, date=date, count=count)
         result_df_arma = pd.DataFrame(index=range(1, maximum_p),
-                                      columns=['weights_predict', 'bias_predict', 'loss', 'direction_precision'])
+                                      columns=['weights_predict', 'bias_predict', 'loss', 'direction_precision'], dtype='float')
         descendant = list(factor_real.columns)
         today_factor_exposure = factor_real.loc[date, :]
         today_index = MktData.index.get_loc(date)
@@ -267,7 +267,7 @@ class Regression:
             arma_weights = ARMA(factor_ret_vector, order=(p, 0)).fit(disp=1)
             weights_predict_arma = np.asscalar(arma_weights.forecast(1)[0])
             result_df_arma.loc[p, 'weights_predict'] = weights_predict_arma
-            arma_bias = ARMA(bias_vector, order=(p, 0)).fit(disp=1)
+            arma_bias = ARMA(bias_vector, order=(p, 0)).fit(disp=-1)
             bias_predict_arma = np.asscalar(arma_bias.forecast(1)[0])
             result_df_arma.loc[p, 'bias_predict'] = bias_predict_arma
             predict_tommorow_ret = weights_predict_arma * today_factor_exposure + bias_predict_arma
@@ -283,29 +283,61 @@ if __name__ == '__main__':
     MktData = intern['MktData']
     MktData = MktData.swaplevel(0, 1, axis=1)
     test_maximum_load_count = 600
-    test_maximum_p = 30
+    test_maximum_p = 10
     test_all_count = 700
     industry_code = '720000'
-    all_test_date = list(MktData.index[-200:-100])
+    all_test_date = list(MktData.index[-150:-100])
     all_date_stats_info = {}
-    IC = pd.Series(MktData.index[-200:-100])
+    all_date_stats_info_arma = {}
+    IC = pd.Series(MktData.index[-150:-100])
     factor_real = pickle.load(open(r'D:/sync/Factor/v5/delta_factor_{}.pkl'.format(industry_code), 'rb'))
-    largest_info = pd.DataFrame(index=MktData.index[-200:-100], columns=pd.MultiIndex.from_product([['weights_predict', 'bias_predict', 'loss', 'direction_precision'], list(range(1, 2))]))
+    largest_info = pd.DataFrame(index=MktData.index[-150:-100], columns=pd.MultiIndex.from_product([['weights_predict', 'bias_predict', 'loss', 'direction_precision'], list(range(1, 2))]))
+    largest_info_arma = pd.DataFrame(index=MktData.index[-150:-100], columns=pd.MultiIndex.from_product([['weights_predict', 'bias_predict', 'loss', 'direction_precision'], list(range(1, 2))]))
     factor_real = factor_real.dropna(axis=1, how='all')
     for test_date in all_test_date:
         test_regression = Regression(industry_code)
         print("-----Analysizing stock of {} on {}-----".format(industry_code, test_date))
         df_average, ic = test_regression.summary_average_estiamte(test_maximum_load_count, date=test_date, count=test_all_count)
         for i in df_average.columns:
-            largest_info.loc[test_date, (i, slice(None))] = df_average[i].idxmax()
+            if i== 'loss':
+                largest_info.loc[test_date, (i, slice(None))] = df_average[i].idxmin()
+            else:
+                largest_info.loc[test_date, (i, slice(None))] = df_average[i].idxmax()
         IC[test_date] = ic
-        # df_average.plot()
-        # plt.show()
-        # plt.savefig(r'D:/sync/fig/average_predict_{}.png'.format(industry_code))
-        # plt.close()
         all_date_stats_info[test_date] = df_average
-        # df_arma = test_regression.summary_arma_estimate(maximum_p=test_maximum_p, date=test_date, count=200)
-        # df_arma.plot()
-        # plt.show()list(df_average[i].nlargest(1))
+        df_arma = test_regression.summary_arma_estimate(maximum_p=test_maximum_p, date=test_date, count=200)
+        for i in df_arma.columns:
+            if i=='loss':
+                largest_info.loc[test_date, (i, slice(None))] = df_arma[i].idxmin()
+            else:
+                largest_info.loc[test_date, (i, slice(None))] = df_arma[i].idxmax()
+        all_date_stats_info_arma[test_date] = df_arma
 
+    avg_distr_precision = [all_date_stats_info[key]['direction_precision'].idxmax() for key in
+                           all_date_stats_info.keys()]
+    plt.hist(avg_distr_precision, bins=20)
+    plt.title("Distribution of average days by precision")
+    plt.xlabel("Days")
+    plt.ylabel('Number')
+    plt.show()
+    avg_distr_loss = [all_date_stats_info[key]['loss'].idxmin() for key in all_date_stats_info.keys()]
+    plt.hist(avg_distr_loss, bins=20)
+    plt.title("Distribution of average days by loss")
+    plt.xlabel("Days")
+    plt.ylabel('Number')
+    plt.show()
 
+    arma_distr_precision = [all_date_stats_info_arma[key]['direction_precision'].idxmax() for key in
+                            all_date_stats_info_arma.keys()]
+    plt.hist(arma_distr_precision, bins=20)
+    plt.title("Distribution of arma days by precsision")
+    plt.xlabel("Days")
+    plt.ylabel('Number')
+    plt.show()
+
+    arma_distr_loss = [all_date_stats_info_arma[key]['loss'].idxmin() for key in all_date_stats_info_arma.keys()]
+    plt.hist(arma_distr_loss, bins=20)
+    plt.title("Distribution of arma days by loss")
+    plt.xlabel("Days")
+    plt.ylabel('Number')
+    plt.show()

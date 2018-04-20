@@ -92,11 +92,10 @@ def predict_certain_day_factor_ret(vector, date, referrence_count):
 def stats_info(vector):
     vector_mean = vector.mean()
     t = vector/vector.std()
-    t_abs_mean = t.mean()
-    division = t_abs_mean/t.std()
-    t_abs_avg = np.abs(t).mean()
-    ratio = (np.abs(t) > 2).sum()/len(vector)
-    return vector_mean, t, t_abs_avg, ratio, division
+    t_abs_mean = np.abs(t).mean()
+    t_mean_abs_std = np.abs(t.mean())/t.std()
+    ratio = (np.abs(t) > 2).sum()/len(vector)# IR>2
+    return vector_mean, t, t_abs_mean, t_mean_abs_std, ratio
 
 
 # IC and IR
@@ -126,11 +125,24 @@ if __name__ == '__main__':
     factor_real = pickle.load(open(r'D:/sync/Factor/v5/delta_factor_{}.pkl'.format(industry_code), 'rb'))
     factor_real = factor_real.dropna(axis=1, how='all')
     test_factor_ret_vector, test_bias_vector = get_all_factor_ret_vector(factor_real)
-    test_factor_ret = predict_certain_day_factor_ret(test_factor_ret_vector, '2018-01-15', 300)
-    test_vector_mean, test_t, test_t_abs_avg, test_ratio, test_division = stats_info(test_factor_ret_vector)
-    test_ic, test_ir = ic_ir(factor_real)
-    test_ic.cumsum().plot()
-    plt.show()
+    all_test_date = list(MktData.index[-150:-100])
+    IC_all = {}
+    all_stats_info = pd.DataFrame(index=MktData.index[-150:-100], columns=['vector_mean', 't_abs_mean', 't_mean_abs_std', 'ratio', 'ir'],dtype='float')
+    for date in all_test_date:
+        predict_factor_ret = predict_certain_day_factor_ret(test_factor_ret_vector, date, 20)
+        index = test_factor_ret_vector.index.get_loc(date)
+        start = index - 20
+        test_vector_mean, test_t, test_t_abs_mean, test_t_mean_abs_std, test_ratio = stats_info(test_factor_ret_vector.iloc[start:index])
+        test_ic, test_ir = ic_ir(factor_real.iloc[start:index])
+        IC_all[date] = test_ic
+        all_stats_info.loc[date, 'vector_mean'] = test_vector_mean
+        all_stats_info.loc[date, 't_abs_mean'] = test_t_abs_mean
+        all_stats_info.loc[date, 't_mean_abs_std'] = test_t_mean_abs_std
+        all_stats_info.loc[date, 'ratio'] = test_ratio
+        all_stats_info.loc[date, 'ir'] = test_ir
+        test_ic.cumsum().plot()
+        plt.title(date)
+        plt.show()
 
 
 

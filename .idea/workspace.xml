@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a502ea9c-00c7-4655-9434-661ccf8edec4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Report/summary.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,11 +35,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Factor-Analysize-v3.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="288" column="50" lean-forward="true" selection-start-line="288" selection-start-column="50" selection-end-line="288" selection-end-column="50" />
+      <file leaf-file-name="summary.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Report/summary.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="119">
+                <caret line="7" column="24" selection-end-line="21" selection-end-column="16" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -46,8 +50,26 @@
       <file leaf-file-name="Factor-Analysize-v4.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="136" column="4" selection-start-line="136" selection-start-column="4" selection-end-line="136" selection-end-column="4" />
+            <state relative-caret-position="-486">
+              <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Factor-Analysize-v3.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-45">
+              <caret line="200" column="58" selection-start-line="200" selection-start-column="53" selection-end-line="200" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="delta_factor.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Strategy/delta_factor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-11">
+              <caret line="4" column="9" lean-forward="true" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -83,6 +105,7 @@
         <option value="$PROJECT_DIR$/Strategy/Factor-Analysize.py" />
         <option value="$PROJECT_DIR$/Strategy/delta_factor.py" />
         <option value="$PROJECT_DIR$/Strategy/Factor-Analysize-v2.py" />
+        <option value="$PROJECT_DIR$/Report/summary.md" />
         <option value="$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py" />
         <option value="$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py" />
       </list>
@@ -94,11 +117,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="45" />
-    <option name="y" value="44" />
-    <option name="width" value="1746" />
-    <option name="height" value="1015" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="-7" />
+    <option name="y" value="2" />
+    <option name="width" value="1932" />
+    <option name="height" value="1045" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -108,12 +131,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="sync" type="b2602c69:ProjectViewProjectNode" />
               <item name="sync" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sync" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sync" type="462c0819:PsiDirectoryNode" />
+              <item name="Report" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sync" type="b2602c69:ProjectViewProjectNode" />
@@ -129,14 +158,15 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -155,7 +185,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Factor-Analysize-v3">
+  <component name="RunManager" selected="Python.Factor-Analysize-v4">
     <configuration name="Factor-Analysize-v2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="sync" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -279,8 +309,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Factor-Analysize-v3" />
         <item itemvalue="Python.Factor-Analysize-v4" />
+        <item itemvalue="Python.Factor-Analysize-v3" />
         <item itemvalue="Python.Factor-Analysize-v2" />
         <item itemvalue="Python.delta_factor" />
         <item itemvalue="Python.Factor-Analysize" />
@@ -310,20 +340,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-7" y="2" width="1932" height="1045" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3293348" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3293348" />
-      <window_info anchor="bottom" x="2392" y="208" width="1091" height="699" id="Python Console" order="7" sideWeight="0.14978679" side_tool="true" type="WINDOWED" weight="0.36928105" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8502132" visible="true" weight="0.4117647" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32897604" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14552239" />
+      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" weight="0.3293348" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3293348" />
+      <window_info anchor="bottom" x="2392" y="208" width="1091" height="699" id="Python Console" order="10" sideWeight="0.14978679" side_tool="true" type="WINDOWED" weight="0.36928105" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8502132" visible="true" weight="0.22406182" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32897604" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.08440171" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.42537314" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32995737" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.5747863" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39869282" />
@@ -359,6 +389,124 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Report/summary.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="119">
+            <caret line="7" column="24" selection-end-line="21" selection-end-column="16" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5491">
+          <caret line="323" selection-start-line="323" selection-end-line="327" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/delta_factor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="48" column="102" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2329">
+          <caret line="137" column="66" lean-forward="true" selection-start-line="137" selection-start-column="66" selection-end-line="137" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Report/summary.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="119">
+            <caret line="7" column="24" selection-end-line="21" selection-end-column="16" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4777">
+          <caret line="281" column="59" lean-forward="true" selection-start-line="281" selection-start-column="59" selection-end-line="281" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/delta_factor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="48" column="102" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2278">
+          <caret line="134" column="18" lean-forward="true" selection-start-line="134" selection-start-column="18" selection-end-line="134" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Report/summary.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="15" selection-start-column="15" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2125">
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/delta_factor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="48" column="102" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Report/summary.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="15" lean-forward="true" selection-start-column="15" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2312">
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/delta_factor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="48" column="102" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4896">
+          <caret line="288" column="50" lean-forward="true" selection-start-line="288" selection-start-column="50" selection-end-line="288" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2312">
+          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4930">
@@ -535,27 +683,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="183" column="69" lean-forward="true" selection-start-line="183" selection-start-column="28" selection-end-line="183" selection-end-column="69" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7291">
           <caret line="17" selection-start-line="17" selection-end-line="18" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Strategy/delta_factor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="48" column="102" lean-forward="true" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="102" />
         </state>
       </provider>
     </entry>
@@ -566,17 +697,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1415">
+          <caret line="183" column="69" lean-forward="true" selection-start-line="183" selection-start-column="28" selection-end-line="183" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Report/summary.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="119">
+            <caret line="7" column="24" selection-end-line="21" selection-end-column="16" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-column="2" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/delta_factor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11">
+          <caret line="4" column="9" lean-forward="true" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="288" column="50" lean-forward="true" selection-start-line="288" selection-start-column="50" selection-end-line="288" selection-end-column="50" />
+        <state relative-caret-position="-45">
+          <caret line="200" column="58" selection-start-line="200" selection-start-column="53" selection-end-line="200" selection-end-column="58" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="136" column="4" selection-start-line="136" selection-start-column="4" selection-end-line="136" selection-end-column="4" />
+        <state relative-caret-position="-486">
+          <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
         </state>
       </provider>
     </entry>
