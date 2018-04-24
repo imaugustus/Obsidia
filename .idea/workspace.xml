@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a502ea9c-00c7-4655-9434-661ccf8edec4" name="Default" comment="" />
+    <list default="true" id="a502ea9c-00c7-4655-9434-661ccf8edec4" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/Report/request.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Strategy/history_analysize.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,6 +15,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/sync$ARMA_Strategy.coverage" NAME="ARMA_Strategy Coverage Results" MODIFIED="1522630953325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Strategy" />
+    <SUITE FILE_PATH="coverage/sync$history_analysize.coverage" NAME="history_analysize Coverage Results" MODIFIED="1524545723959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Strategy" />
     <SUITE FILE_PATH="coverage/sync$Factor_Analysize_v4.coverage" NAME="Factor-Analysize-v4 Coverage Results" MODIFIED="1524120306274" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Strategy" />
     <SUITE FILE_PATH="coverage/sync$pd.coverage" NAME="pd Coverage Results" MODIFIED="1522743548822" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TestNewLib" />
   </component>
@@ -30,46 +35,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="summary.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Report/summary.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="119">
-                <caret line="7" column="24" selection-end-line="21" selection-end-column="16" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Factor-Analysize-v4.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py">
+      <file leaf-file-name="history_analysize.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Strategy/history_analysize.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-765">
-              <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Factor-Analysize-v5.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v5.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="Factor-Analysize-v3.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-45">
-              <caret line="200" column="58" selection-start-line="200" selection-start-column="53" selection-end-line="200" selection-end-column="58" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="delta_factor.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Strategy/delta_factor.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-11">
-              <caret line="4" column="9" lean-forward="true" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+            <state relative-caret-position="91">
+              <caret line="126" column="25" lean-forward="true" selection-start-line="126" selection-start-column="25" selection-end-line="126" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,6 +61,8 @@
       <find>predict_datetime</find>
       <find>droplevel</find>
       <find>clf</find>
+      <find>disp</find>
+      <find>group</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -108,6 +83,8 @@
         <option value="$PROJECT_DIR$/Report/summary.md" />
         <option value="$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py" />
         <option value="$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py" />
+        <option value="$PROJECT_DIR$/Report/request.md" />
+        <option value="$PROJECT_DIR$/Strategy/history_analysize.py" />
       </list>
     </option>
   </component>
@@ -118,8 +95,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="y" value="2" />
+    <option name="y" value="11" />
     <option name="width" value="1932" />
     <option name="height" value="1045" />
   </component>
@@ -131,7 +107,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -158,6 +133,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -185,7 +161,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Factor-Analysize-v4">
+  <component name="RunManager" selected="Python.history_analysize">
     <configuration name="Factor-Analysize-v2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="sync" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -243,25 +219,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="Factor-Analysize" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="sync" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\ProgramData\Anaconda3\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Strategy" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Strategy/Factor-Analysize.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="sync" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -300,20 +257,39 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="history_analysize" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="sync" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\ProgramData\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Strategy" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Strategy/history_analysize.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <list>
-      <item itemvalue="Python.Factor-Analysize" />
       <item itemvalue="Python.delta_factor" />
       <item itemvalue="Python.Factor-Analysize-v2" />
       <item itemvalue="Python.Factor-Analysize-v3" />
       <item itemvalue="Python.Factor-Analysize-v4" />
+      <item itemvalue="Python.history_analysize" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.history_analysize" />
         <item itemvalue="Python.Factor-Analysize-v4" />
         <item itemvalue="Python.Factor-Analysize-v3" />
         <item itemvalue="Python.Factor-Analysize-v2" />
         <item itemvalue="Python.delta_factor" />
-        <item itemvalue="Python.Factor-Analysize" />
       </list>
     </recent_temporary>
   </component>
@@ -340,22 +316,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="2" width="1932" height="1045" extended-state="0" />
+    <frame x="0" y="11" width="1932" height="1045" extended-state="0" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.16777042" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" weight="0.3293348" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3293348" />
       <window_info anchor="bottom" x="2392" y="208" width="1091" height="699" id="Python Console" order="10" sideWeight="0.14978679" side_tool="true" type="WINDOWED" weight="0.36928105" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8502132" visible="true" weight="0.36313465" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8502132" visible="true" weight="0.47240618" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32897604" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32158118" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4984127" visible="true" weight="0.10897436" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" weight="0.32995737" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.5747863" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.5" />
+      <window_info id="Structure" order="1" sideWeight="0.5007949" side_tool="true" weight="0.10523504" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39869282" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39845476" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -388,23 +364,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Report/summary.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="119">
-            <caret line="7" column="24" selection-end-line="21" selection-end-column="16" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5491">
-          <caret line="323" selection-start-line="323" selection-end-line="327" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/delta_factor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
@@ -640,13 +599,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ARMA_Strategy.py" />
-    <entry file="file://$PROJECT_DIR$/TestNewLib/pd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/ARMA_Strategy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="986">
@@ -682,20 +634,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7291">
-          <caret line="17" selection-start-line="17" selection-end-line="18" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="289" column="17" lean-forward="true" selection-start-line="289" selection-start-column="17" selection-end-line="289" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Arma-Strategy-V4.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1415">
@@ -715,6 +653,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Report/summary.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-column="2" selection-end-column="15" />
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="119">
@@ -723,35 +666,75 @@
           <second_editor />
         </state>
       </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-column="2" selection-end-column="15" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Report/request.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="34">
+            <caret line="2" column="18" lean-forward="true" selection-start-line="1" selection-end-line="4" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Strategy/delta_factor.py">
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v5.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="4" column="9" lean-forward="true" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+        <state relative-caret-position="202">
+          <caret line="80" column="9" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TestNewLib/pd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret line="200" column="58" selection-start-line="200" selection-start-column="53" selection-end-line="200" selection-end-column="58" />
+        <state relative-caret-position="202">
+          <caret line="266" column="73" selection-start-line="266" selection-start-column="69" selection-end-line="266" selection-end-column="73" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-765">
-          <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
+        <state relative-caret-position="134">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v5.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize-v2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="289" column="17" selection-start-line="289" selection-start-column="17" selection-end-line="289" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/Factor-Analysize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="17" selection-start-line="17" selection-end-line="18" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/delta_factor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-113">
+          <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Strategy/history_analysize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="126" column="25" lean-forward="true" selection-start-line="126" selection-start-column="25" selection-end-line="126" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
